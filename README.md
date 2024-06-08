@@ -1,0 +1,2 @@
+# newtify.ai
+hackathon examples
