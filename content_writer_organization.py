@@ -26,55 +26,55 @@ llm = ChatGoogleGenerativeAI(model="gemini-pro",
 #llm = ChatGroq(groq_api_key=GROQ_API_KEY,model_name="Llama3-8b-8192")
 
 
-def marketing_strategist():
-     with st.form("Marketing_strategist"):  # Ensure `st.form` is within the expander
-        goal_marketing_strategist = st.text_area('Marketing Strategist Goals:', 'Define about his goal like "Lead the team in creating effective content marketing etc..."')
-        backstory_marketing_strategist = st.text_area('Marketing Strategist Backstory:', 'Tell something about him like "A seasoned Chief Marketing Officer with a keen eye for standout marketing content."')
+def manager():
+     with st.form("Manager"):  # Ensure `st.form` is within the expander
+        goal_manager = st.text_area('Manager:', 'Define about his goal like "Lead the team in creating effective content writing etc..."')
+        backstory_manager = st.text_area('Manager Backstory:', 'Tell something about him like "A seasoned Chief Marketing Officer with a keen eye for standout content creation."')
         submitted1 = st.form_submit_button("Submit Details")
 
         if submitted1:
             # Process form 1 data
-            st.session_state["goal_marketing_strategist"] = goal_marketing_strategist
-            st.session_state["backstory_marketing_strategist"] = backstory_marketing_strategist
+            st.session_state["goal_manager"] = goal_manager
+            st.session_state["backstory_manager"] = backstory_manager
             # Call the processing function
             #process_form_data(form_type="Marketing_strategist")  # Pass form identifier
 
-            st.success(f"Thanks goals are {goal_marketing_strategist}! backstory is {backstory_marketing_strategist}.")
+            st.success(f"Thanks goals are {goal_manager}! backstory is {backstory_manager}.")
 
-def content_specialist():
-     with st.form("content_specialist"):  # Ensure `st.form` is within the expander
-        goal_content_specialist = st.text_area('Content Specialist Goals:', 'Define about his goal like "Critique and refine all types of content like email, blog, articles, papers, etc..."')
-        backstory_content_specialist = st.text_area('Content Specialist Backstory:', 'Tell something about him like "A professional copywriter with a wealth of experience in persuasive writing."')
+def reviewer():
+     with st.form("reviewer"):  # Ensure `st.form` is within the expander
+        goal_reviewer = st.text_area('Reviewer Goals:', 'Define about his goal like "Critique and refine all types of content like email, blog, articles, papers, etc..."')
+        backstory_reviewer = st.text_area('Reviewer Backstory:', "A professional copywriter with a wealth of experience in persuasive and content writing.")
         submitted1 = st.form_submit_button("Submit Details")
 
         if submitted1:
             # Process form  data
-            st.session_state["goal_content_specialist"] = goal_content_specialist
-            st.session_state["backstory_content_specialist"] = backstory_content_specialist
+            st.session_state["goal_reviewer"] = goal_reviewer
+            st.session_state["backstory_reviewer"] = backstory_reviewer
             # Call the processing function
-            #process_form_data(form_type="content_specialist")  # Pass form identifier
-            st.success(f"Thanks goals are {goal_content_specialist}! backstory is {backstory_content_specialist}.")
+            #process_form_data(form_type="reviewer")  # Pass form identifier
+            st.success(f"Thanks goals are {goal_reviewer}! backstory is {backstory_reviewer}.")
 
 
-def content_writer():
-     with st.form("content_writer"):  # Ensure `st.form` is within the expander
-        goal_content_writer = st.text_area('Content Writer Goals:', 'Define about his goal like "Craft concise and engaging content like email, blog, articles, papers, etc..."')
-        backstory_content_writer = st.text_area('Content Writer Backstory:', 'Tell something about him like "Experienced in writing impactful and awesome Content.."')
+def writer():
+     with st.form("writer"):  # Ensure `st.form` is within the expander
+        goal_writer = st.text_area('Content Writer Goals:', 'Define about his goal like "Craft concise and engaging content like email, blog, articles, papers, etc..."')
+        backstory_writer = st.text_area('Content Writer Backstory:',"Experienced in writing impactful and awesome Content..")
         submitted1 = st.form_submit_button("Submit Details")
 
         if submitted1:
             # Process form  data
-            st.session_state["goal_content_writer"] = goal_content_writer
-            st.session_state["backstory_content_writer"] = backstory_content_writer
+            st.session_state["goal_writer"] = goal_writer
+            st.session_state["backstory_writer"] = backstory_writer
             # Call the processing function
-            #process_form_data(form_type="content_specialist")  # Pass form identifier
-            st.success(f"Thanks goals are {goal_content_writer}! backstory is {backstory_content_writer}.")
+            #process_form_data(form_type="reviewer")  # Pass form identifier
+            st.success(f"Thanks goals are {goal_writer}! backstory is {backstory_writer}.")
 
 
 
 def task():
      with st.form("Task"):  # Ensure `st.form` is within the expander
-        task_description = st.text_area('Provide Task Description in steps:','Like: sDetailed description of task, atleast give a description in 100 words' )
+        task_description = st.text_area('Provide Task Description in steps:','Like: sDetailed description of task, atleast give a description in 500 words, try to write it in steps' )
         expected_output = st.text_area('Write the expected output:', 'Like: Two final, revised cold email variations promoting a ai plugin platform &ai solution.')
         submitted1 = st.form_submit_button("Submit Details")
 
@@ -83,7 +83,7 @@ def task():
             st.session_state["task_description"] = task_description
             st.session_state["expected_output"] = expected_output
             # Call the processing function
-            #process_form_data(form_type="content_specialist")  # Pass form identifier
+            #process_form_data(form_type="reviewer")  # Pass form identifier
             st.success(f"Thanks task description is {task_description}! expected output is {expected_output}.")
 
 
@@ -91,14 +91,14 @@ def task():
 
 
 
-st.title("Multiple Forms on One Page")
+st.title("Multiple agents to solve your problems")
 
 
 #form2()
 task()
-marketing_strategist()
-content_specialist()
-content_writer()
+manager()
+reviewer()
+writer()
 
 
 
@@ -112,27 +112,27 @@ def search(search_query:str):
 
 writer = Agent(
     role='Professional Content Writer',
-    goal=st.session_state["goal_content_writer"],
-    backstory=st.session_state["backstory_content_writer"],
+    goal=st.session_state["goal_writer"],
+    backstory=st.session_state["backstory_writer"],
     verbose=True,
     allow_delegation=False,
     llm=llm,
     tools = [search],
 )
 
-strategist = Agent(
-    role='Marketing Strategist',
-    goal=st.session_state["goal_marketing_strategist"],
-    backstory=st.session_state["backstory_marketing_strategist"],
+manager = Agent(
+    role='Manager',
+    goal=st.session_state["goal_manager"],
+    backstory=st.session_state["backstory_manager"],
     verbose=True,
     allow_delegation=True,
     llm=llm
 )
 
-specialist = Agent(
+reviewer = Agent(
     role='Content Specialist',
-    goal=st.session_state["goal_content_specialist"],
-    backstory=st.session_state["backstory_content_specialist"],
+    goal=st.session_state["goal_reviewer"],
+    backstory=st.session_state["backstory_reviewer"],
     verbose=True,
     allow_delegation=False,
     llm=llm
@@ -149,7 +149,7 @@ given_task = Task(
 
 # Create a Single Crew
 email_crew = Crew(
-    agents=[writer, strategist, specialist],
+    agents=[writer, manager, reviewer],
     tasks=[given_task],
     verbose=True,
     process=Process.sequential
