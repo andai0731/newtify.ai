@@ -25,7 +25,7 @@ playwright
 nest_asyncio
 #run playwright install in terminal to download new browsers
 crewai
-crewai-tools
+crewai-tools==0.0.15
 duckduckgo-search
 huggingface_hub
 langchain_google_genai
