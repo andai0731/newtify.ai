@@ -5,6 +5,7 @@ from crewai import Agent, Task, Crew, Process
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain.agents import Tool
 from langchain.agents import load_tools
+from langchain.agents import tool
 from crewai_tools import tool
 from langchain_groq import ChatGroq
 
