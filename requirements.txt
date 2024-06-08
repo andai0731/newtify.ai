@@ -11,3 +11,4 @@ python-dotenv
 langchain
 openai
 google-api-python-client # Google API
+pysqlite3-binary
