@@ -1,0 +1,13 @@
+crewai
+crewai-tools
+duckduckgo-search
+huggingface_hub
+langchain_google_genai
+langchain_groq 
+google-generativeai
+langchain_community
+langchain-google-genai
+python-dotenv
+langchain
+openai
+google-api-python-client # Google API
