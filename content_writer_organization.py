@@ -18,7 +18,7 @@ GROQ_API_KEY = os.getenv("groq_api_key")
 #Set gemini pro as llm
 llm = ChatGoogleGenerativeAI(model="gemini-pro",
                             verbose = True,
-                            temperature = 0.5,
+                            temperature = 0.8,
                             google_api_key=GOOGLE_API_KEY)
 
 
@@ -44,7 +44,7 @@ def manager():
 def reviewer():
      with st.form("reviewer"):  # Ensure `st.form` is within the expander
         goal_reviewer = st.text_area('Reviewer Goals:', 'Define about his goal like "Critique and refine all types of content like email, blog, articles, papers, etc..."')
-        backstory_reviewer = st.text_area('Reviewer Backstory:', "A professional copywriter with a wealth of experience in persuasive and content writing.")
+        backstory_reviewer = st.text_area('Reviewer Backstory:', "A professional copywriter with a wealth of experience in persuasive content writing.")
         submitted1 = st.form_submit_button("Submit Details")
 
         if submitted1:
@@ -74,8 +74,8 @@ def writer():
 
 def task():
      with st.form("Task"):  # Ensure `st.form` is within the expander
-        task_description = st.text_area('Provide Task Description in steps:','Like: sDetailed description of task, atleast give a description in 500 words, try to write it in steps' )
-        expected_output = st.text_area('Write the expected output:', 'Like: Two final, revised cold email variations promoting a ai plugin platform &ai solution.')
+        task_description = st.text_area('Provide Task Description in steps:','Like: Detailed description of task, atleast give a description in 500 words, try to write it in steps' )
+        expected_output = st.text_area('Write the expected output:', 'Like: Two final, revised article variations on topic "Health and Fitness".')
         submitted1 = st.form_submit_button("Submit Details")
 
         if submitted1:
@@ -141,7 +141,7 @@ reviewer = Agent(
 # Define Task
 given_task = Task(
     description=st.session_state["task_description"],
-    agent=strategist,  # The Marketing Strategist is in charge and can delegate,
+    agent=manager,  # The Marketing Strategist is in charge and can delegate,
     expected_output=st.session_state["expected_output"] # Define the expected output
 
 )
